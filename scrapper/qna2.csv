@@ -1,0 +1,1222 @@
+https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/2010948?r=SearchResults#2010948,"
+Storing Objects in HTML5 localStorage
+
+
+        
+    
+
+","
+I'd like to store a JavaScript object in HTML5 localStorage, but my object is apparently being converted to a string.
+I can store and retrieve primitive JavaScript types and arrays using localStorage, but objects don't seem to work.  Should they? 
+Here's my code:
+var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+console.log('typeof testObject: ' + typeof testObject);
+console.log('testObject properties:');
+for (var prop in testObject) {
+    console.log('  ' + prop + ': ' + testObject[prop]);
+}
+
+// Put the object into storage
+localStorage.setItem('testObject', testObject);
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('typeof retrievedObject: ' + typeof retrievedObject);
+console.log('Value of retrievedObject: ' + retrievedObject);
+
+The console output is
+typeof testObject: object
+testObject properties:
+  one: 1
+  two: 2
+  three: 3
+typeof retrievedObject: string
+Value of retrievedObject: [object Object]
+
+It looks to me like the setItem method is converting the input to a string before storing it.
+I see this behavior in Safari, Chrome, and Firefox, so I assume it's my misunderstanding of the HTML5 Web Storage spec, not a browser-specific bug or limitation.
+I've tried to make sense of the structured clone algorithm described in http://www.w3.org/TR/html5/infrastructure.html.  I don't fully understand what it's saying, but maybe my problem has to do with my object's properties not being enumerable (???)  
+Is there an easy workaround?
+
+Update: The W3C eventually changed their minds about the structured-clone specification, and decided to change the spec to match the implementations.  See https://www.w3.org/Bugs/Public/show_bug.cgi?id=12111. So this question is no longer 100% valid, but the answers still may be of interest.
+","var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+"
+https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/2010948?r=SearchResults#2010948,"
+Storing Objects in HTML5 localStorage
+
+
+        
+    
+
+","
+I'd like to store a JavaScript object in HTML5 localStorage, but my object is apparently being converted to a string.
+I can store and retrieve primitive JavaScript types and arrays using localStorage, but objects don't seem to work.  Should they? 
+Here's my code:
+var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+console.log('typeof testObject: ' + typeof testObject);
+console.log('testObject properties:');
+for (var prop in testObject) {
+    console.log('  ' + prop + ': ' + testObject[prop]);
+}
+
+// Put the object into storage
+localStorage.setItem('testObject', testObject);
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('typeof retrievedObject: ' + typeof retrievedObject);
+console.log('Value of retrievedObject: ' + retrievedObject);
+
+The console output is
+typeof testObject: object
+testObject properties:
+  one: 1
+  two: 2
+  three: 3
+typeof retrievedObject: string
+Value of retrievedObject: [object Object]
+
+It looks to me like the setItem method is converting the input to a string before storing it.
+I see this behavior in Safari, Chrome, and Firefox, so I assume it's my misunderstanding of the HTML5 Web Storage spec, not a browser-specific bug or limitation.
+I've tried to make sense of the structured clone algorithm described in http://www.w3.org/TR/html5/infrastructure.html.  I don't fully understand what it's saying, but maybe my problem has to do with my object's properties not being enumerable (???)  
+Is there an easy workaround?
+
+Update: The W3C eventually changed their minds about the structured-clone specification, and decided to change the spec to match the implementations.  See https://www.w3.org/Bugs/Public/show_bug.cgi?id=12111. So this question is no longer 100% valid, but the answers still may be of interest.
+","var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+"
+https://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string/646643?r=SearchResults#646643,"
+How to check if a string “StartsWith” another string?
+
+
+        
+    
+
+","
+How would I write the equivalent of C#'s String.StartsWith in JavaScript?
+var haystack = 'hello world';
+var needle = 'he';
+
+haystack.startsWith(needle) == true
+
+Note: This is an old question, and as pointed out in the comments ECMAScript 2015 (ES6) introduced the .startsWith method. However, at the time of writing this update (2015) browser support is far from complete.
+","""Hello World!"".startsWith(""He""); // true
+
+var haystack = ""Hello world"";
+var prefix = 'orl';
+haystack.startsWith(prefix); // false
+"
+https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/2010948?r=SearchResults#2010948,"
+Storing Objects in HTML5 localStorage
+
+
+        
+    
+
+","
+I'd like to store a JavaScript object in HTML5 localStorage, but my object is apparently being converted to a string.
+I can store and retrieve primitive JavaScript types and arrays using localStorage, but objects don't seem to work.  Should they? 
+Here's my code:
+var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+console.log('typeof testObject: ' + typeof testObject);
+console.log('testObject properties:');
+for (var prop in testObject) {
+    console.log('  ' + prop + ': ' + testObject[prop]);
+}
+
+// Put the object into storage
+localStorage.setItem('testObject', testObject);
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('typeof retrievedObject: ' + typeof retrievedObject);
+console.log('Value of retrievedObject: ' + retrievedObject);
+
+The console output is
+typeof testObject: object
+testObject properties:
+  one: 1
+  two: 2
+  three: 3
+typeof retrievedObject: string
+Value of retrievedObject: [object Object]
+
+It looks to me like the setItem method is converting the input to a string before storing it.
+I see this behavior in Safari, Chrome, and Firefox, so I assume it's my misunderstanding of the HTML5 Web Storage spec, not a browser-specific bug or limitation.
+I've tried to make sense of the structured clone algorithm described in http://www.w3.org/TR/html5/infrastructure.html.  I don't fully understand what it's saying, but maybe my problem has to do with my object's properties not being enumerable (???)  
+Is there an easy workaround?
+
+Update: The W3C eventually changed their minds about the structured-clone specification, and decided to change the spec to match the implementations.  See https://www.w3.org/Bugs/Public/show_bug.cgi?id=12111. So this question is no longer 100% valid, but the answers still may be of interest.
+","var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+"
+https://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string/646643?r=SearchResults#646643,"
+How to check if a string “StartsWith” another string?
+
+
+        
+    
+
+","
+How would I write the equivalent of C#'s String.StartsWith in JavaScript?
+var haystack = 'hello world';
+var needle = 'he';
+
+haystack.startsWith(needle) == true
+
+Note: This is an old question, and as pointed out in the comments ECMAScript 2015 (ES6) introduced the .startsWith method. However, at the time of writing this update (2015) browser support is far from complete.
+","""Hello World!"".startsWith(""He""); // true
+
+var haystack = ""Hello world"";
+var prefix = 'orl';
+haystack.startsWith(prefix); // false
+"
+https://stackoverflow.com/questions/332872/encode-url-in-javascript/332897?r=SearchResults#332897,"
+Encode URL in JavaScript?
+
+
+        
+    
+
+","
+How do you safely encode a URL using JavaScript such that it can be put into a GET string?
+var myUrl = ""http://example.com/index.html?param=1&anotherParam=2"";
+var myOtherUrl = ""http://example.com/index.html?url="" + myUrl;
+
+I assume that you need to encode the myUrl variable on that second line?
+","var myOtherUrl = 
+       ""http://example.com/index.html?url="" + encodeURIComponent(myUrl);
+"
+https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/2010948?r=SearchResults#2010948,"
+Storing Objects in HTML5 localStorage
+
+
+        
+    
+
+","
+I'd like to store a JavaScript object in HTML5 localStorage, but my object is apparently being converted to a string.
+I can store and retrieve primitive JavaScript types and arrays using localStorage, but objects don't seem to work.  Should they? 
+Here's my code:
+var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+console.log('typeof testObject: ' + typeof testObject);
+console.log('testObject properties:');
+for (var prop in testObject) {
+    console.log('  ' + prop + ': ' + testObject[prop]);
+}
+
+// Put the object into storage
+localStorage.setItem('testObject', testObject);
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('typeof retrievedObject: ' + typeof retrievedObject);
+console.log('Value of retrievedObject: ' + retrievedObject);
+
+The console output is
+typeof testObject: object
+testObject properties:
+  one: 1
+  two: 2
+  three: 3
+typeof retrievedObject: string
+Value of retrievedObject: [object Object]
+
+It looks to me like the setItem method is converting the input to a string before storing it.
+I see this behavior in Safari, Chrome, and Firefox, so I assume it's my misunderstanding of the HTML5 Web Storage spec, not a browser-specific bug or limitation.
+I've tried to make sense of the structured clone algorithm described in http://www.w3.org/TR/html5/infrastructure.html.  I don't fully understand what it's saying, but maybe my problem has to do with my object's properties not being enumerable (???)  
+Is there an easy workaround?
+
+Update: The W3C eventually changed their minds about the structured-clone specification, and decided to change the spec to match the implementations.  See https://www.w3.org/Bugs/Public/show_bug.cgi?id=12111. So this question is no longer 100% valid, but the answers still may be of interest.
+","var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+"
+https://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string/646643?r=SearchResults#646643,"
+How to check if a string “StartsWith” another string?
+
+
+        
+    
+
+","
+How would I write the equivalent of C#'s String.StartsWith in JavaScript?
+var haystack = 'hello world';
+var needle = 'he';
+
+haystack.startsWith(needle) == true
+
+Note: This is an old question, and as pointed out in the comments ECMAScript 2015 (ES6) introduced the .startsWith method. However, at the time of writing this update (2015) browser support is far from complete.
+","""Hello World!"".startsWith(""He""); // true
+
+var haystack = ""Hello world"";
+var prefix = 'orl';
+haystack.startsWith(prefix); // false
+"
+https://stackoverflow.com/questions/332872/encode-url-in-javascript/332897?r=SearchResults#332897,"
+Encode URL in JavaScript?
+
+
+        
+    
+
+","
+How do you safely encode a URL using JavaScript such that it can be put into a GET string?
+var myUrl = ""http://example.com/index.html?param=1&anotherParam=2"";
+var myOtherUrl = ""http://example.com/index.html?url="" + myUrl;
+
+I assume that you need to encode the myUrl variable on that second line?
+","var myOtherUrl = 
+       ""http://example.com/index.html?url="" + encodeURIComponent(myUrl);
+"
+https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j/2727191?r=SearchResults#2727191,"
+How do you get a list of the names of all files present in a directory in Node.js?
+
+
+        
+    
+
+","
+I'm trying to get a list of the names of all the files present in a directory using Node.js.  I want output that is an array of filenames. How can I do this?
+","const testFolder = './tests/';
+const fs = require('fs');
+
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+});
+"
+https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/2010948?r=SearchResults#2010948,"
+Storing Objects in HTML5 localStorage
+
+
+        
+    
+
+","
+I'd like to store a JavaScript object in HTML5 localStorage, but my object is apparently being converted to a string.
+I can store and retrieve primitive JavaScript types and arrays using localStorage, but objects don't seem to work.  Should they? 
+Here's my code:
+var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+console.log('typeof testObject: ' + typeof testObject);
+console.log('testObject properties:');
+for (var prop in testObject) {
+    console.log('  ' + prop + ': ' + testObject[prop]);
+}
+
+// Put the object into storage
+localStorage.setItem('testObject', testObject);
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('typeof retrievedObject: ' + typeof retrievedObject);
+console.log('Value of retrievedObject: ' + retrievedObject);
+
+The console output is
+typeof testObject: object
+testObject properties:
+  one: 1
+  two: 2
+  three: 3
+typeof retrievedObject: string
+Value of retrievedObject: [object Object]
+
+It looks to me like the setItem method is converting the input to a string before storing it.
+I see this behavior in Safari, Chrome, and Firefox, so I assume it's my misunderstanding of the HTML5 Web Storage spec, not a browser-specific bug or limitation.
+I've tried to make sense of the structured clone algorithm described in http://www.w3.org/TR/html5/infrastructure.html.  I don't fully understand what it's saying, but maybe my problem has to do with my object's properties not being enumerable (???)  
+Is there an easy workaround?
+
+Update: The W3C eventually changed their minds about the structured-clone specification, and decided to change the spec to match the implementations.  See https://www.w3.org/Bugs/Public/show_bug.cgi?id=12111. So this question is no longer 100% valid, but the answers still may be of interest.
+","var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+"
+https://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string/646643?r=SearchResults#646643,"
+How to check if a string “StartsWith” another string?
+
+
+        
+    
+
+","
+How would I write the equivalent of C#'s String.StartsWith in JavaScript?
+var haystack = 'hello world';
+var needle = 'he';
+
+haystack.startsWith(needle) == true
+
+Note: This is an old question, and as pointed out in the comments ECMAScript 2015 (ES6) introduced the .startsWith method. However, at the time of writing this update (2015) browser support is far from complete.
+","""Hello World!"".startsWith(""He""); // true
+
+var haystack = ""Hello world"";
+var prefix = 'orl';
+haystack.startsWith(prefix); // false
+"
+https://stackoverflow.com/questions/332872/encode-url-in-javascript/332897?r=SearchResults#332897,"
+Encode URL in JavaScript?
+
+
+        
+    
+
+","
+How do you safely encode a URL using JavaScript such that it can be put into a GET string?
+var myUrl = ""http://example.com/index.html?param=1&anotherParam=2"";
+var myOtherUrl = ""http://example.com/index.html?url="" + myUrl;
+
+I assume that you need to encode the myUrl variable on that second line?
+","var myOtherUrl = 
+       ""http://example.com/index.html?url="" + encodeURIComponent(myUrl);
+"
+https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j/2727191?r=SearchResults#2727191,"
+How do you get a list of the names of all files present in a directory in Node.js?
+
+
+        
+    
+
+","
+I'm trying to get a list of the names of all the files present in a directory using Node.js.  I want output that is an array of filenames. How can I do this?
+","const testFolder = './tests/';
+const fs = require('fs');
+
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+});
+"
+https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing/1909508?r=SearchResults#1909508,"
+How to delay the .keyup() handler until the user stops typing?
+
+
+        
+    
+
+","
+I’ve got a search field. Right now it searches for every keyup. So if someone types “Windows”, it will make a search with AJAX for every keyup: “W”, “Wi”, “Win”, “Wind”, “Windo”, “Window”, “Windows”.
+I want to have a delay, so it only searches when the user stops typing for 200 ms.
+There is no option for this in the keyup function, and I have tried setTimeout, but it didn’t work.
+How can I do that?
+","function delay(callback, ms) {
+  var timer = 0;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      callback.apply(context, args);
+    }, ms || 0);
+  };
+}
+
+
+// Example usage:
+
+$('#input').keyup(delay(function (e) {
+  console.log('Time elapsed!', this.value);
+}, 500));"
+https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/2010948?r=SearchResults#2010948,"
+Storing Objects in HTML5 localStorage
+
+
+        
+    
+
+","
+I'd like to store a JavaScript object in HTML5 localStorage, but my object is apparently being converted to a string.
+I can store and retrieve primitive JavaScript types and arrays using localStorage, but objects don't seem to work.  Should they? 
+Here's my code:
+var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+console.log('typeof testObject: ' + typeof testObject);
+console.log('testObject properties:');
+for (var prop in testObject) {
+    console.log('  ' + prop + ': ' + testObject[prop]);
+}
+
+// Put the object into storage
+localStorage.setItem('testObject', testObject);
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('typeof retrievedObject: ' + typeof retrievedObject);
+console.log('Value of retrievedObject: ' + retrievedObject);
+
+The console output is
+typeof testObject: object
+testObject properties:
+  one: 1
+  two: 2
+  three: 3
+typeof retrievedObject: string
+Value of retrievedObject: [object Object]
+
+It looks to me like the setItem method is converting the input to a string before storing it.
+I see this behavior in Safari, Chrome, and Firefox, so I assume it's my misunderstanding of the HTML5 Web Storage spec, not a browser-specific bug or limitation.
+I've tried to make sense of the structured clone algorithm described in http://www.w3.org/TR/html5/infrastructure.html.  I don't fully understand what it's saying, but maybe my problem has to do with my object's properties not being enumerable (???)  
+Is there an easy workaround?
+
+Update: The W3C eventually changed their minds about the structured-clone specification, and decided to change the spec to match the implementations.  See https://www.w3.org/Bugs/Public/show_bug.cgi?id=12111. So this question is no longer 100% valid, but the answers still may be of interest.
+","var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+"
+https://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string/646643?r=SearchResults#646643,"
+How to check if a string “StartsWith” another string?
+
+
+        
+    
+
+","
+How would I write the equivalent of C#'s String.StartsWith in JavaScript?
+var haystack = 'hello world';
+var needle = 'he';
+
+haystack.startsWith(needle) == true
+
+Note: This is an old question, and as pointed out in the comments ECMAScript 2015 (ES6) introduced the .startsWith method. However, at the time of writing this update (2015) browser support is far from complete.
+","""Hello World!"".startsWith(""He""); // true
+
+var haystack = ""Hello world"";
+var prefix = 'orl';
+haystack.startsWith(prefix); // false
+"
+https://stackoverflow.com/questions/332872/encode-url-in-javascript/332897?r=SearchResults#332897,"
+Encode URL in JavaScript?
+
+
+        
+    
+
+","
+How do you safely encode a URL using JavaScript such that it can be put into a GET string?
+var myUrl = ""http://example.com/index.html?param=1&anotherParam=2"";
+var myOtherUrl = ""http://example.com/index.html?url="" + myUrl;
+
+I assume that you need to encode the myUrl variable on that second line?
+","var myOtherUrl = 
+       ""http://example.com/index.html?url="" + encodeURIComponent(myUrl);
+"
+https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j/2727191?r=SearchResults#2727191,"
+How do you get a list of the names of all files present in a directory in Node.js?
+
+
+        
+    
+
+","
+I'm trying to get a list of the names of all the files present in a directory using Node.js.  I want output that is an array of filenames. How can I do this?
+","const testFolder = './tests/';
+const fs = require('fs');
+
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+});
+"
+https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing/1909508?r=SearchResults#1909508,"
+How to delay the .keyup() handler until the user stops typing?
+
+
+        
+    
+
+","
+I’ve got a search field. Right now it searches for every keyup. So if someone types “Windows”, it will make a search with AJAX for every keyup: “W”, “Wi”, “Win”, “Wind”, “Windo”, “Window”, “Windows”.
+I want to have a delay, so it only searches when the user stops typing for 200 ms.
+There is no option for this in the keyup function, and I have tried setTimeout, but it didn’t work.
+How can I do that?
+","function delay(callback, ms) {
+  var timer = 0;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      callback.apply(context, args);
+    }, ms || 0);
+  };
+}
+
+
+// Example usage:
+
+$('#input').keyup(delay(function (e) {
+  console.log('Time elapsed!', this.value);
+}, 500));"
+https://stackoverflow.com/questions/1219860/html-encoding-lost-when-attribute-read-from-input-field/1219983?r=SearchResults#1219983,"
+HTML-encoding lost when attribute read from input field
+
+
+        
+    
+
+","
+I’m using JavaScript to pull a value out from a hidden field and display it in a textbox. The value in the hidden field is encoded.
+For example,
+<input id='hiddenId' type='hidden' value='chalk &amp; cheese' />
+
+gets pulled into
+<input type='text' value='chalk &amp; cheese' />
+
+via some jQuery to get the value from the hidden field (it’s at this point that I lose the encoding):
+$('#hiddenId').attr('value')
+
+The problem is that when I read chalk &amp; cheese from the hidden field, JavaScript seems to lose the encoding. I do not want the value to be chalk & cheese. I want the literal amp; to be retained.
+Is there a JavaScript library or a jQuery method that will HTML-encode a string?
+","function htmlEncode(value){
+  // Create a in-memory element, set its inner text (which is automatically encoded)
+  // Then grab the encoded contents back out. The element never exists on the DOM.
+  return $('<textarea/>').text(value).html();
+}
+
+function htmlDecode(value){
+  return $('<textarea/>').html(value).text();
+}
+"
+https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/2010948?r=SearchResults#2010948,"
+Storing Objects in HTML5 localStorage
+
+
+        
+    
+
+","
+I'd like to store a JavaScript object in HTML5 localStorage, but my object is apparently being converted to a string.
+I can store and retrieve primitive JavaScript types and arrays using localStorage, but objects don't seem to work.  Should they? 
+Here's my code:
+var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+console.log('typeof testObject: ' + typeof testObject);
+console.log('testObject properties:');
+for (var prop in testObject) {
+    console.log('  ' + prop + ': ' + testObject[prop]);
+}
+
+// Put the object into storage
+localStorage.setItem('testObject', testObject);
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('typeof retrievedObject: ' + typeof retrievedObject);
+console.log('Value of retrievedObject: ' + retrievedObject);
+
+The console output is
+typeof testObject: object
+testObject properties:
+  one: 1
+  two: 2
+  three: 3
+typeof retrievedObject: string
+Value of retrievedObject: [object Object]
+
+It looks to me like the setItem method is converting the input to a string before storing it.
+I see this behavior in Safari, Chrome, and Firefox, so I assume it's my misunderstanding of the HTML5 Web Storage spec, not a browser-specific bug or limitation.
+I've tried to make sense of the structured clone algorithm described in http://www.w3.org/TR/html5/infrastructure.html.  I don't fully understand what it's saying, but maybe my problem has to do with my object's properties not being enumerable (???)  
+Is there an easy workaround?
+
+Update: The W3C eventually changed their minds about the structured-clone specification, and decided to change the spec to match the implementations.  See https://www.w3.org/Bugs/Public/show_bug.cgi?id=12111. So this question is no longer 100% valid, but the answers still may be of interest.
+","var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+"
+https://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string/646643?r=SearchResults#646643,"
+How to check if a string “StartsWith” another string?
+
+
+        
+    
+
+","
+How would I write the equivalent of C#'s String.StartsWith in JavaScript?
+var haystack = 'hello world';
+var needle = 'he';
+
+haystack.startsWith(needle) == true
+
+Note: This is an old question, and as pointed out in the comments ECMAScript 2015 (ES6) introduced the .startsWith method. However, at the time of writing this update (2015) browser support is far from complete.
+","""Hello World!"".startsWith(""He""); // true
+
+var haystack = ""Hello world"";
+var prefix = 'orl';
+haystack.startsWith(prefix); // false
+"
+https://stackoverflow.com/questions/332872/encode-url-in-javascript/332897?r=SearchResults#332897,"
+Encode URL in JavaScript?
+
+
+        
+    
+
+","
+How do you safely encode a URL using JavaScript such that it can be put into a GET string?
+var myUrl = ""http://example.com/index.html?param=1&anotherParam=2"";
+var myOtherUrl = ""http://example.com/index.html?url="" + myUrl;
+
+I assume that you need to encode the myUrl variable on that second line?
+","var myOtherUrl = 
+       ""http://example.com/index.html?url="" + encodeURIComponent(myUrl);
+"
+https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j/2727191?r=SearchResults#2727191,"
+How do you get a list of the names of all files present in a directory in Node.js?
+
+
+        
+    
+
+","
+I'm trying to get a list of the names of all the files present in a directory using Node.js.  I want output that is an array of filenames. How can I do this?
+","const testFolder = './tests/';
+const fs = require('fs');
+
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+});
+"
+https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing/1909508?r=SearchResults#1909508,"
+How to delay the .keyup() handler until the user stops typing?
+
+
+        
+    
+
+","
+I’ve got a search field. Right now it searches for every keyup. So if someone types “Windows”, it will make a search with AJAX for every keyup: “W”, “Wi”, “Win”, “Wind”, “Windo”, “Window”, “Windows”.
+I want to have a delay, so it only searches when the user stops typing for 200 ms.
+There is no option for this in the keyup function, and I have tried setTimeout, but it didn’t work.
+How can I do that?
+","function delay(callback, ms) {
+  var timer = 0;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      callback.apply(context, args);
+    }, ms || 0);
+  };
+}
+
+
+// Example usage:
+
+$('#input').keyup(delay(function (e) {
+  console.log('Time elapsed!', this.value);
+}, 500));"
+https://stackoverflow.com/questions/1219860/html-encoding-lost-when-attribute-read-from-input-field/1219983?r=SearchResults#1219983,"
+HTML-encoding lost when attribute read from input field
+
+
+        
+    
+
+","
+I’m using JavaScript to pull a value out from a hidden field and display it in a textbox. The value in the hidden field is encoded.
+For example,
+<input id='hiddenId' type='hidden' value='chalk &amp; cheese' />
+
+gets pulled into
+<input type='text' value='chalk &amp; cheese' />
+
+via some jQuery to get the value from the hidden field (it’s at this point that I lose the encoding):
+$('#hiddenId').attr('value')
+
+The problem is that when I read chalk &amp; cheese from the hidden field, JavaScript seems to lose the encoding. I do not want the value to be chalk & cheese. I want the literal amp; to be retained.
+Is there a JavaScript library or a jQuery method that will HTML-encode a string?
+","function htmlEncode(value){
+  // Create a in-memory element, set its inner text (which is automatically encoded)
+  // Then grab the encoded contents back out. The element never exists on the DOM.
+  return $('<textarea/>').text(value).html();
+}
+
+function htmlDecode(value){
+  return $('<textarea/>').html(value).text();
+}
+"
+https://stackoverflow.com/questions/1726630/formatting-a-number-with-exactly-two-decimals-in-javascript/1726662?r=SearchResults#1726662,"
+Formatting a number with exactly two decimals in JavaScript
+
+
+        
+    
+
+","
+I have this line of code which rounds my numbers to two decimal places. But I get numbers like this: 10.8, 2.4, etc. These are not my idea of two decimal places so how I can improve the following?
+Math.round(price*Math.pow(10,2))/Math.pow(10,2);
+
+I want numbers like 10.80, 2.40, etc. Use of jQuery is fine with me.
+","(10.8).toFixed(2); // ""10.80""
+
+var num = 2.4;
+alert(num.toFixed(2)); // ""2.40""
+"
+https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/2010948?r=SearchResults#2010948,"
+Storing Objects in HTML5 localStorage
+
+
+        
+    
+
+","
+I'd like to store a JavaScript object in HTML5 localStorage, but my object is apparently being converted to a string.
+I can store and retrieve primitive JavaScript types and arrays using localStorage, but objects don't seem to work.  Should they? 
+Here's my code:
+var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+console.log('typeof testObject: ' + typeof testObject);
+console.log('testObject properties:');
+for (var prop in testObject) {
+    console.log('  ' + prop + ': ' + testObject[prop]);
+}
+
+// Put the object into storage
+localStorage.setItem('testObject', testObject);
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('typeof retrievedObject: ' + typeof retrievedObject);
+console.log('Value of retrievedObject: ' + retrievedObject);
+
+The console output is
+typeof testObject: object
+testObject properties:
+  one: 1
+  two: 2
+  three: 3
+typeof retrievedObject: string
+Value of retrievedObject: [object Object]
+
+It looks to me like the setItem method is converting the input to a string before storing it.
+I see this behavior in Safari, Chrome, and Firefox, so I assume it's my misunderstanding of the HTML5 Web Storage spec, not a browser-specific bug or limitation.
+I've tried to make sense of the structured clone algorithm described in http://www.w3.org/TR/html5/infrastructure.html.  I don't fully understand what it's saying, but maybe my problem has to do with my object's properties not being enumerable (???)  
+Is there an easy workaround?
+
+Update: The W3C eventually changed their minds about the structured-clone specification, and decided to change the spec to match the implementations.  See https://www.w3.org/Bugs/Public/show_bug.cgi?id=12111. So this question is no longer 100% valid, but the answers still may be of interest.
+","var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+"
+https://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string/646643?r=SearchResults#646643,"
+How to check if a string “StartsWith” another string?
+
+
+        
+    
+
+","
+How would I write the equivalent of C#'s String.StartsWith in JavaScript?
+var haystack = 'hello world';
+var needle = 'he';
+
+haystack.startsWith(needle) == true
+
+Note: This is an old question, and as pointed out in the comments ECMAScript 2015 (ES6) introduced the .startsWith method. However, at the time of writing this update (2015) browser support is far from complete.
+","""Hello World!"".startsWith(""He""); // true
+
+var haystack = ""Hello world"";
+var prefix = 'orl';
+haystack.startsWith(prefix); // false
+"
+https://stackoverflow.com/questions/332872/encode-url-in-javascript/332897?r=SearchResults#332897,"
+Encode URL in JavaScript?
+
+
+        
+    
+
+","
+How do you safely encode a URL using JavaScript such that it can be put into a GET string?
+var myUrl = ""http://example.com/index.html?param=1&anotherParam=2"";
+var myOtherUrl = ""http://example.com/index.html?url="" + myUrl;
+
+I assume that you need to encode the myUrl variable on that second line?
+","var myOtherUrl = 
+       ""http://example.com/index.html?url="" + encodeURIComponent(myUrl);
+"
+https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j/2727191?r=SearchResults#2727191,"
+How do you get a list of the names of all files present in a directory in Node.js?
+
+
+        
+    
+
+","
+I'm trying to get a list of the names of all the files present in a directory using Node.js.  I want output that is an array of filenames. How can I do this?
+","const testFolder = './tests/';
+const fs = require('fs');
+
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+});
+"
+https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing/1909508?r=SearchResults#1909508,"
+How to delay the .keyup() handler until the user stops typing?
+
+
+        
+    
+
+","
+I’ve got a search field. Right now it searches for every keyup. So if someone types “Windows”, it will make a search with AJAX for every keyup: “W”, “Wi”, “Win”, “Wind”, “Windo”, “Window”, “Windows”.
+I want to have a delay, so it only searches when the user stops typing for 200 ms.
+There is no option for this in the keyup function, and I have tried setTimeout, but it didn’t work.
+How can I do that?
+","function delay(callback, ms) {
+  var timer = 0;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      callback.apply(context, args);
+    }, ms || 0);
+  };
+}
+
+
+// Example usage:
+
+$('#input').keyup(delay(function (e) {
+  console.log('Time elapsed!', this.value);
+}, 500));"
+https://stackoverflow.com/questions/1219860/html-encoding-lost-when-attribute-read-from-input-field/1219983?r=SearchResults#1219983,"
+HTML-encoding lost when attribute read from input field
+
+
+        
+    
+
+","
+I’m using JavaScript to pull a value out from a hidden field and display it in a textbox. The value in the hidden field is encoded.
+For example,
+<input id='hiddenId' type='hidden' value='chalk &amp; cheese' />
+
+gets pulled into
+<input type='text' value='chalk &amp; cheese' />
+
+via some jQuery to get the value from the hidden field (it’s at this point that I lose the encoding):
+$('#hiddenId').attr('value')
+
+The problem is that when I read chalk &amp; cheese from the hidden field, JavaScript seems to lose the encoding. I do not want the value to be chalk & cheese. I want the literal amp; to be retained.
+Is there a JavaScript library or a jQuery method that will HTML-encode a string?
+","function htmlEncode(value){
+  // Create a in-memory element, set its inner text (which is automatically encoded)
+  // Then grab the encoded contents back out. The element never exists on the DOM.
+  return $('<textarea/>').text(value).html();
+}
+
+function htmlDecode(value){
+  return $('<textarea/>').html(value).text();
+}
+"
+https://stackoverflow.com/questions/1726630/formatting-a-number-with-exactly-two-decimals-in-javascript/1726662?r=SearchResults#1726662,"
+Formatting a number with exactly two decimals in JavaScript
+
+
+        
+    
+
+","
+I have this line of code which rounds my numbers to two decimal places. But I get numbers like this: 10.8, 2.4, etc. These are not my idea of two decimal places so how I can improve the following?
+Math.round(price*Math.pow(10,2))/Math.pow(10,2);
+
+I want numbers like 10.80, 2.40, etc. Use of jQuery is fine with me.
+","(10.8).toFixed(2); // ""10.80""
+
+var num = 2.4;
+alert(num.toFixed(2)); // ""2.40""
+"
+https://stackoverflow.com/questions/1160008/which-keycode-for-escape-key-with-jquery/1160109?r=SearchResults#1160109,"
+Which keycode for escape key with jQuery
+
+
+        
+    
+
+","
+I have two functions.  When enter is pressed the functions runs correctly but when escape is pressed it doesn't. What's the correct number for the escape key?  
+$(document).keypress(function(e) { 
+    if (e.which == 13) $('.save').click();   // enter (works as expected)
+    if (e.which == 27) $('.cancel').click(); // esc   (does not work)
+});
+
+","$(document).keyup(function(e) {
+  if (e.keyCode === 13) $('.save').click();     // enter
+  if (e.keyCode === 27) $('.cancel').click();   // esc
+});
+"
+https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/2010948?r=SearchResults#2010948,"
+Storing Objects in HTML5 localStorage
+
+
+        
+    
+
+","
+I'd like to store a JavaScript object in HTML5 localStorage, but my object is apparently being converted to a string.
+I can store and retrieve primitive JavaScript types and arrays using localStorage, but objects don't seem to work.  Should they? 
+Here's my code:
+var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+console.log('typeof testObject: ' + typeof testObject);
+console.log('testObject properties:');
+for (var prop in testObject) {
+    console.log('  ' + prop + ': ' + testObject[prop]);
+}
+
+// Put the object into storage
+localStorage.setItem('testObject', testObject);
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('typeof retrievedObject: ' + typeof retrievedObject);
+console.log('Value of retrievedObject: ' + retrievedObject);
+
+The console output is
+typeof testObject: object
+testObject properties:
+  one: 1
+  two: 2
+  three: 3
+typeof retrievedObject: string
+Value of retrievedObject: [object Object]
+
+It looks to me like the setItem method is converting the input to a string before storing it.
+I see this behavior in Safari, Chrome, and Firefox, so I assume it's my misunderstanding of the HTML5 Web Storage spec, not a browser-specific bug or limitation.
+I've tried to make sense of the structured clone algorithm described in http://www.w3.org/TR/html5/infrastructure.html.  I don't fully understand what it's saying, but maybe my problem has to do with my object's properties not being enumerable (???)  
+Is there an easy workaround?
+
+Update: The W3C eventually changed their minds about the structured-clone specification, and decided to change the spec to match the implementations.  See https://www.w3.org/Bugs/Public/show_bug.cgi?id=12111. So this question is no longer 100% valid, but the answers still may be of interest.
+","var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+"
+https://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string/646643?r=SearchResults#646643,"
+How to check if a string “StartsWith” another string?
+
+
+        
+    
+
+","
+How would I write the equivalent of C#'s String.StartsWith in JavaScript?
+var haystack = 'hello world';
+var needle = 'he';
+
+haystack.startsWith(needle) == true
+
+Note: This is an old question, and as pointed out in the comments ECMAScript 2015 (ES6) introduced the .startsWith method. However, at the time of writing this update (2015) browser support is far from complete.
+","""Hello World!"".startsWith(""He""); // true
+
+var haystack = ""Hello world"";
+var prefix = 'orl';
+haystack.startsWith(prefix); // false
+"
+https://stackoverflow.com/questions/332872/encode-url-in-javascript/332897?r=SearchResults#332897,"
+Encode URL in JavaScript?
+
+
+        
+    
+
+","
+How do you safely encode a URL using JavaScript such that it can be put into a GET string?
+var myUrl = ""http://example.com/index.html?param=1&anotherParam=2"";
+var myOtherUrl = ""http://example.com/index.html?url="" + myUrl;
+
+I assume that you need to encode the myUrl variable on that second line?
+","var myOtherUrl = 
+       ""http://example.com/index.html?url="" + encodeURIComponent(myUrl);
+"
+https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j/2727191?r=SearchResults#2727191,"
+How do you get a list of the names of all files present in a directory in Node.js?
+
+
+        
+    
+
+","
+I'm trying to get a list of the names of all the files present in a directory using Node.js.  I want output that is an array of filenames. How can I do this?
+","const testFolder = './tests/';
+const fs = require('fs');
+
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+});
+"
+https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing/1909508?r=SearchResults#1909508,"
+How to delay the .keyup() handler until the user stops typing?
+
+
+        
+    
+
+","
+I’ve got a search field. Right now it searches for every keyup. So if someone types “Windows”, it will make a search with AJAX for every keyup: “W”, “Wi”, “Win”, “Wind”, “Windo”, “Window”, “Windows”.
+I want to have a delay, so it only searches when the user stops typing for 200 ms.
+There is no option for this in the keyup function, and I have tried setTimeout, but it didn’t work.
+How can I do that?
+","function delay(callback, ms) {
+  var timer = 0;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      callback.apply(context, args);
+    }, ms || 0);
+  };
+}
+
+
+// Example usage:
+
+$('#input').keyup(delay(function (e) {
+  console.log('Time elapsed!', this.value);
+}, 500));"
+https://stackoverflow.com/questions/1219860/html-encoding-lost-when-attribute-read-from-input-field/1219983?r=SearchResults#1219983,"
+HTML-encoding lost when attribute read from input field
+
+
+        
+    
+
+","
+I’m using JavaScript to pull a value out from a hidden field and display it in a textbox. The value in the hidden field is encoded.
+For example,
+<input id='hiddenId' type='hidden' value='chalk &amp; cheese' />
+
+gets pulled into
+<input type='text' value='chalk &amp; cheese' />
+
+via some jQuery to get the value from the hidden field (it’s at this point that I lose the encoding):
+$('#hiddenId').attr('value')
+
+The problem is that when I read chalk &amp; cheese from the hidden field, JavaScript seems to lose the encoding. I do not want the value to be chalk & cheese. I want the literal amp; to be retained.
+Is there a JavaScript library or a jQuery method that will HTML-encode a string?
+","function htmlEncode(value){
+  // Create a in-memory element, set its inner text (which is automatically encoded)
+  // Then grab the encoded contents back out. The element never exists on the DOM.
+  return $('<textarea/>').text(value).html();
+}
+
+function htmlDecode(value){
+  return $('<textarea/>').html(value).text();
+}
+"
+https://stackoverflow.com/questions/1726630/formatting-a-number-with-exactly-two-decimals-in-javascript/1726662?r=SearchResults#1726662,"
+Formatting a number with exactly two decimals in JavaScript
+
+
+        
+    
+
+","
+I have this line of code which rounds my numbers to two decimal places. But I get numbers like this: 10.8, 2.4, etc. These are not my idea of two decimal places so how I can improve the following?
+Math.round(price*Math.pow(10,2))/Math.pow(10,2);
+
+I want numbers like 10.80, 2.40, etc. Use of jQuery is fine with me.
+","(10.8).toFixed(2); // ""10.80""
+
+var num = 2.4;
+alert(num.toFixed(2)); // ""2.40""
+"
+https://stackoverflow.com/questions/1160008/which-keycode-for-escape-key-with-jquery/1160109?r=SearchResults#1160109,"
+Which keycode for escape key with jQuery
+
+
+        
+    
+
+","
+I have two functions.  When enter is pressed the functions runs correctly but when escape is pressed it doesn't. What's the correct number for the escape key?  
+$(document).keypress(function(e) { 
+    if (e.which == 13) $('.save').click();   // enter (works as expected)
+    if (e.which == 27) $('.cancel').click(); // esc   (does not work)
+});
+
+","$(document).keyup(function(e) {
+  if (e.keyCode === 13) $('.save').click();     // enter
+  if (e.keyCode === 27) $('.cancel').click();   // esc
+});
+"
+https://stackoverflow.com/questions/3894048/what-is-the-best-way-to-initialize-a-javascript-date-to-midnight/3894087?r=SearchResults#3894087,"
+What is the best way to initialize a JavaScript Date to midnight?
+
+
+        
+    
+
+","
+What is the simplest way to obtain an instance of new Date() but set the time at midnight?
+","var d = new Date();
+d.setHours(0,0,0,0);
+"
