@@ -74,6 +74,7 @@ def train(args):
 
     optimizer_cls = eval('torch.optim.%s' % args.optimizer)  # FIXME: this is evil!
     optimizer = optimizer_cls(model.parameters(), lr=args.lr)
+    print(optimizer)
 
     if not args.pretrain:
         if args.uniform_init:
@@ -102,7 +103,8 @@ def train(args):
 
         for batch_examples in train_set.batch_iter(batch_size=args.batch_size, shuffle=True):
             batch_examples = [e for e in batch_examples if len(e.tgt_actions) <= args.decode_max_time_step]
-            #print(batch_examples[0].__dict__)
+            pprint(batch_examples[0].__dict__)
+            sys.exit()
             train_iter += 1
             optimizer.zero_grad()
 

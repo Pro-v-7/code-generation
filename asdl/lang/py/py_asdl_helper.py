@@ -3,6 +3,8 @@
 import sys
 
 from asdl.asdl_ast import RealizedField, AbstractSyntaxTree
+from pprint import pprint
+
 
 
 # from https://stackoverflow.com/questions/15357422/python-determine-if-a-string-should-be-converted-into-int-or-float
@@ -27,9 +29,11 @@ def isint(x):
 
 def python_ast_to_asdl_ast(py_ast_node, grammar):
     # node should be composite
+    #print(py_ast_node)
     py_node_name = type(py_ast_node).__name__
     # assert py_node_name.startswith('_ast.')
-
+    #print(py_node_name)
+    
     production = grammar.get_prod_by_ctr_name(py_node_name)
 
     fields = []

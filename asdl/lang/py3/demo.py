@@ -1,6 +1,6 @@
 # coding=utf-8
 import sys
-print(sys.path)
+#print(sys.path)
 sys.path.append('/home/admin1/Documents/tranX-master/')
 import ast
 from asdl.lang.py3.py3_transition_system import *
@@ -16,15 +16,21 @@ if __name__ == '__main__':
     
     grammar = ASDLGrammar.from_text(asdl_text)
 
-    py_code = """pandas.read('file.csv', nrows=100,header=False)"""
+    py_code = """df=pandas.read('file.csv', nrows=100,header=False)"""
 
     # get the (domain-specific) python AST of the example Python code snippet
     py_ast = ast.parse(py_code)
     #print()
     #print (json.dumps(ast2json(py_ast), indent=1))
+    #sys.exit()
     # convert the python AST into general-purpose ASDL AST used by tranX
     #pprint(grammar.__dict__)
     asdl_ast = python_ast_to_asdl_ast(py_ast.body[0], grammar)
+    
+    print("pyAst")
+    #pprint(py_ast.body[0].__dict__)
+    #print(py_ast.__dict__)
+    #sys.exit()
     print('String representation of the ASDL AST: \n%s' % asdl_ast.to_string())
     print('Size of the AST: %d' % asdl_ast.size)
 
@@ -35,7 +41,7 @@ if __name__ == '__main__':
     #pprint(grammar.__dict__)
     #sys.exit()
     parser = Python3TransitionSystem(grammar)
-    pprint([x.__dict__ for x in list(parser.__dict__['grammar'].__dict__['type2id'].keys())])
+    #pprint([x.__dict__ for x in list(parser.__dict__['grammar'].__dict__['type2id'].keys())])
 
     # get the sequence of gold-standard actions to construct the ASDL AST
     actions = parser.get_actions(asdl_ast)

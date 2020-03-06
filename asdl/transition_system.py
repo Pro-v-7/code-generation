@@ -50,6 +50,7 @@ class TransitionSystem(object):
         actions = []
 
         parent_action = ApplyRuleAction(asdl_ast.production)
+        print("***************************\m",asdl_ast.production)
         actions.append(parent_action)
 
         for field in asdl_ast.fields:
