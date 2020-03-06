@@ -25,8 +25,11 @@ const tree = parser.program();
 //console.log(tree.findAllNodes())
 rules=JSON.stringify(tree.toStringTree(parser.ruleNames))
 console.log(JSON.stringify(tree.toStringTree(parser.ruleNames),undefined, 4));
-var rx2 = /\(([^)]+)\)/
+rule=rules.replace("\"",'')
+console.log(rules)
+var rx2 = /([A-Za-z0-9() ]+)/
 console.log(rules.match(rx2))
+
 
 
 
